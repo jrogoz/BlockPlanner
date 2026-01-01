@@ -4,19 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.blockplanner.data.Converts
 
 import com.example.blockplanner.data.User
 import com.example.blockplanner.data.UserDao
 import com.example.blockplanner.data.Rep
-import com.example.blockplanner.data.RepDao
 import com.example.blockplanner.data.TimeBlock
 import com.example.blockplanner.data.TimeBlockDao
 
-@Database(entities = [User::class, Rep::class, TimeBlock::class], version = 2, exportSchema = false)
+@Database(entities = [User::class, Rep::class, TimeBlock::class, Converts::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
-    abstract fun repDao(): RepDao
     abstract fun timeBlockDao(): TimeBlockDao
 
     companion object {
