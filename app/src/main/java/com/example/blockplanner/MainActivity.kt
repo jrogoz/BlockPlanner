@@ -27,11 +27,9 @@ import kotlinx.coroutines.launch
 
 import com.example.blockplanner.ui.theme.BlockPlannerTheme
 import com.example.blockplanner.AppDatabase
+import com.example.blockplanner.data.Rep
 import com.example.blockplanner.data.User
 import com.example.blockplanner.data.UserDao
-
-import com.example.blockplanner.data.Rep
-import com.example.blockplanner.data.RepDao
 
 import com.example.blockplanner.data.TimeBlock
 import com.example.blockplanner.data.TimeBlockDao
@@ -53,18 +51,13 @@ class MainActivity : ComponentActivity() {
                 email = "example@example.com"
                 )).toInt()
 
-            db.repDao().insert(Rep(repType = "once"))
-            db.repDao().insert(Rep(repType = "daily"))
-            db.repDao().insert(Rep(repType = "weekly"))
-            db.repDao().insert(Rep(repType = "custom"))
-
             db.timeBlockDao().insert(TimeBlock(
                 userId = userId,
-                date_start = "02.01.26r.",
-                date_stop = "None",
-                time_start = "9:00",
-                time_stop = "10:00",
-                repId = 1
+                dateStart = "02.01.26r.",
+                dateStop = "None",
+                timeStart = "9:00",
+                timeStop = "10:00",
+                rep = Rep.NONE
             ))
 
 //            val users = db.userDao().getAllUsers()
