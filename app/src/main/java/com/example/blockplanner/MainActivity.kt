@@ -45,13 +45,14 @@ class MainActivity : ComponentActivity() {
 
         lifecycleScope.launch {
             val userId = db.userDao().insert(User(
-                username = "Asiek2",
+                username = "Asiek",
                 password = "bardzosilnehaslo",
-                email = "example2@example.com"
+                email = "example@example.com"
                 )).toInt()
 
             db.timeBlockDao().insert(TimeBlock(
                 userId = userId,
+                title = "obiad",
                 dateStart = "02.04.26r.",
                 dateStop = "None",
                 timeStart = "9:00",
@@ -93,7 +94,7 @@ fun DailyScreen(timeBlockDao: TimeBlockDao) {
         blocks.forEach {
             TimeBlockCard(
                 TimeBlockUi(
-                    title = "Blok",
+                    title = it.title,
                     start = it.timeStart,
                     end = it.timeStop
                 )
