@@ -13,7 +13,7 @@ import com.example.blockplanner.data.Rep
 import com.example.blockplanner.data.TimeBlock
 import com.example.blockplanner.data.TimeBlockDao
 
-@Database(entities = [User::class, TimeBlock::class], version = 3, exportSchema = false)
+@Database(entities = [User::class, TimeBlock::class], version = 4, exportSchema = false)
 @TypeConverters(Converts::class)
 abstract class AppDatabase : RoomDatabase() {
 

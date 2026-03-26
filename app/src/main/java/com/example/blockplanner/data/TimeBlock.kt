@@ -15,6 +15,7 @@ import androidx.room.*
 data class TimeBlock(
     @PrimaryKey(autoGenerate = true) val id:Int = 0,
     val userId: Int,
+    val title: String,
     val dateStart: String,
     val dateStop: String,
     val timeStart: String,
