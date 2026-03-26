@@ -4,8 +4,8 @@ import androidx.room.TypeConverter
 
 class Converts {
     @TypeConverter
-    fun fromRep(rep: Rep): String {
-        return rep.name
+    fun fromRep(value: Rep): String {
+        return value.name
     }
 
     @TypeConverter

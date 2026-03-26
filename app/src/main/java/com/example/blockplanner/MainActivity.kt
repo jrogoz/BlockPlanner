@@ -35,7 +35,6 @@ import com.example.blockplanner.data.TimeBlock
 import com.example.blockplanner.data.TimeBlockDao
 
 
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,23 +45,19 @@ class MainActivity : ComponentActivity() {
 
         lifecycleScope.launch {
             val userId = db.userDao().insert(User(
-                username = "Asiek",
+                username = "Asiek2",
                 password = "bardzosilnehaslo",
-                email = "example@example.com"
+                email = "example2@example.com"
                 )).toInt()
 
             db.timeBlockDao().insert(TimeBlock(
                 userId = userId,
-                dateStart = "02.01.26r.",
+                dateStart = "02.04.26r.",
                 dateStop = "None",
                 timeStart = "9:00",
                 timeStop = "10:00",
                 rep = Rep.NONE
             ))
-
-//            val users = db.userDao().getAllUsers()
-//            val createdUser = db.userDao().getUserById(userId)
-
 
         }
 
@@ -74,7 +69,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BlockPlannerTheme {
                 Column{
-                    DailyScreen()
+                    DailyScreen(db.timeBlockDao())
                     UserListScreen(db.userDao())
                 }
             }
@@ -83,19 +78,26 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun DailyScreen() {
+fun DailyScreen(timeBlockDao: TimeBlockDao) {
+
+    var blocks by remember { mutableStateOf(listOf<TimeBlock>()) }
+
+    LaunchedEffect(Unit) {
+        blocks = timeBlockDao.getAllTimeBlocks()
+    }
 
     Column(modifier = Modifier.padding(16.dp)) {
         Text("Dzisiejsze bloki", style = MaterialTheme.typography.headlineMedium)
         Spacer(Modifier.height(16.dp))
 
-        val exampleBlocks = listOf(
-            TimeBlockUi("Czytanie", "08:00", "09:00"),
-            TimeBlockUi("Śniadanie", "09:00", "10:00")
-        )
-
-        exampleBlocks.forEach {
-            TimeBlockCard(it)
+        blocks.forEach {
+            TimeBlockCard(
+                TimeBlockUi(
+                    title = "Blok",
+                    start = it.timeStart,
+                    end = it.timeStop
+                )
+            )
             Spacer(Modifier.height(8.dp))
         }
     }
